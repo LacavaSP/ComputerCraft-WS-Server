@@ -33,7 +33,7 @@ webSocketServidor.on('connection', (socket) => {
 });
 
 servidor.listen(porta, '195.35.37.40',() => {
-    console.log(`http://195.35.37.40:${porta}`)
+    console.log(`on ${porta}`)
 })
 
 servidor.post('/api/mensagem', (req, res) => {
