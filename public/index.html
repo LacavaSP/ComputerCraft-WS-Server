@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Silkscreen&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CC WS Terminal</title>
+</head>
+<style>
+    body {
+        font-family: 'Silkscreen', sans-serif !important;
+        background-color: #f9fcff;
+        background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+        width: 100vw;
+    }
+
+    #messagePanel {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        color: white;
+        background: radial-gradient(circle at 22.4% 21.7%, rgb(4, 189, 228) 0%, rgb(2, 83, 185) 100.2%);
+    }
+
+    .header {
+        display: flex;
+        flex-direction: column;
+
+    }
+    .formgroup {
+        margin: 10px;  
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        background: transparent;
+        outline: none;
+        font-family: 'Silkscreen', sans-serif !important;
+        border: none;  
+        border-bottom: 1px solid grey;
+        color: #025297;
+        margin-top: 10px;
+    }
+
+    textarea {
+        margin-top: 30px;
+        background: transparent;
+        outline: none;
+        font-family: 'Silkscreen', sans-serif !important;  
+        border: 1px solid grey;
+        color: #025297;
+        border-radius: 4px;
+        resize: none;
+        height: 150px;
+    }
+
+    label {
+        color: #0367c1;
+    }
+    
+    button {
+        font-family: 'Silkscreen', sans-serif !important;  
+        outline: none;
+        border: none;
+        color: white;
+        width: 150px !important;
+        font-size: 20px;
+        padding: 10px;
+        margin-top: 30px;
+        border-radius: 2px;
+        background: radial-gradient(circle at 22.4% 21.7%, rgb(4, 189, 228) 0%, rgb(2, 83, 185) 100.2%);
+    }
+
+    button:focus {
+        background: radial-gradient(circle at 22.4% 21.7%, rgb(4, 152, 181) 0%, rgb(3, 64, 137) 100.2%);
+    }
+
+
+    .body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .body > * {
+        width: 95%;
+    }
+</style>
+<body>
+    <div id="messagePanel">
+        <div class="header">
+
+            <span>
+                Terminal de Mensagens
+            </span>
+           
+        </div>
+        <div class="body">
+            <div class="formgroup">
+                <label>Nome</label><input id="name">
+            </div>
+            <div class="formgroup">
+                <label>Mensagem</label><textarea id="msg"></textarea>
+            </div>
+           
+                <button id="botao">
+                    Enviar
+                </button>
+             
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const nome = document.getElementById('name')
+        const msg = document.getElementById('msg')
+        document.getElementById('botao').addEventListener('click', envia)
+        async function envia() {
+            if (nome.value && msg.value) {
+                await axios.post('http://195.35.37.40:2525/api/mensagem', {msg: `${nome.value}:${msg.value}`})
+                msg.value = ''
+            }
+        }
+    </script>
+
+</body>
+</html>
