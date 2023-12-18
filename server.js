@@ -37,6 +37,7 @@ servidor.listen(porta, '195.35.37.40',() => {
 })
 
 servidor.post('/api/mensagem', (req, res) => {
+    console.log(`Mensagem recebida de ${req.body.msg.split(':')[0]} => ${req.body.msg.split(':')[1]}`)
     pessoasConectadas.forEach((socket) => socket.send(JSON.stringify(req.body.msg)))
     return res.status(200).json(req.body)
 })
